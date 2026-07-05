@@ -238,7 +238,8 @@ class TreadmillController {
     await this.requestControl();
     this.log(`Wysyłanie nachylenia: ${incline}% (z ponowieniami)`);
     
-    const val = Math.round(incline * 10);
+    // Ta bieżnia oczekuje surowej wartości % (nie x10 jak standard FTMS)
+    const val = Math.round(incline);
     const payload1 = val & 0xff;
     const payload2 = (val >> 8) & 0xff;
 
