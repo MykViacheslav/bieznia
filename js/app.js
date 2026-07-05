@@ -97,10 +97,10 @@ function initYouTubePlayers(videoUrl, musicUrl) {
     } else {
       ytVideoPlayer = new YT.Player('youtubePlayer', {
         height: '100%', width: '100%', videoId: videoId,
-        playerVars: { 'autoplay': 1, 'controls': 0, 'disablekb': 1, 'fs': 0, 'loop': 1, 'modestbranding': 1, 'rel': 0 },
+        playerVars: { 'autoplay': 1, 'controls': 0, 'disablekb': 1, 'fs': 0, 'loop': 1, 'modestbranding': 1, 'rel': 0, 'playsinline': 1, 'mute': 1, 'playlist': videoId },
         events: {
           'onReady': (event) => {
-            if(musicId) event.target.mute();
+            event.target.mute(); // Mobile requires mute for autoplay
             event.target.playVideo();
           },
           'onError': onYouTubeError
@@ -120,7 +120,7 @@ function initYouTubePlayers(videoUrl, musicUrl) {
     } else {
       ytMusicPlayer = new YT.Player('youtubeMusicPlayer', {
         height: '100%', width: '100%', videoId: musicId,
-        playerVars: { 'autoplay': 1, 'controls': 0, 'loop': 1 },
+        playerVars: { 'autoplay': 1, 'controls': 0, 'loop': 1, 'playsinline': 1, 'playlist': musicId },
         events: { 
           'onReady': (event) => event.target.playVideo(),
           'onError': onYouTubeError
