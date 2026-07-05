@@ -137,11 +137,11 @@ class TreadmillController {
     return new Promise((resolve) => {
       this.writeQueue = this.writeQueue.then(async () => {
         const res = await execute();
-        await new Promise(r => setTimeout(r, 400)); // Odczekaj 400ms ZANIM pozwolisz na kolejną komendę
+        await new Promise(r => setTimeout(r, 1000)); // 1 sekunda opóźnienia
         resolve(res);
       }).catch(async () => {
         const res = await execute();
-        await new Promise(r => setTimeout(r, 400));
+        await new Promise(r => setTimeout(r, 1000));
         resolve(res);
       });
     });
@@ -235,9 +235,23 @@ class TreadmillController {
   }
 
   async setTargetIncline(incline) {
-    if (!await this.requestControl()) return;
-    const inclineRaw = Math.round(clamp(Number(incline), 0, 20) * 10);
-    await this._writeCommand(FTMS_OP.setTargetInclination, [inclineRaw & 0xff, (inclineRaw >> 8) & 0xff]);
-    this.log(`Wysłano docelowe nachylenie: ${incline}%`);
+    await this.requestControl(); // Wymuś request przed nachyleniem
+    this.log(`Wysyłanie nachylenia: ${incline}%`);
+    
+    const val = Math.round(incline * 10);
+    // FTMS setTargetInclination requires SINT16. We send it as little-endian bytes.
+    const payload1 = val & 0xff;
+    const payload2 = (val >> 8) & 0xff;
+    
+    const success = await this._writeCommand(FTMS_OP.setTargetInclination, [payload1, payload2]);
+    
+    // Fallback dla niektórych tanich bieżni (wysyłka wartości bez mnożnika x10)
+    if (success && incline > 0) {
+      await new Promise(r => setTimeout(r, 500));
+      const fallbackVal = Math.round(incline);
+      const f1 = fallbackVal & 0xff;
+      const f2 = (fallbackVal >> 8) & 0xff;
+      await this._writeCommand(FTMS_OP.setTargetInclination, [f1, f2]);
+    }
   }
 }
