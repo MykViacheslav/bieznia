@@ -235,23 +235,18 @@ class TreadmillController {
   }
 
   async setTargetIncline(incline) {
-    await this.requestControl(); // Wymuś request przed nachyleniem
-    this.log(`Wysyłanie nachylenia: ${incline}%`);
+    await this.requestControl();
+    this.log(`Wysyłanie nachylenia: ${incline}% (z ponowieniami)`);
     
     const val = Math.round(incline * 10);
-    // FTMS setTargetInclination requires SINT16. We send it as little-endian bytes.
     const payload1 = val & 0xff;
     const payload2 = (val >> 8) & 0xff;
-    
-    const success = await this._writeCommand(FTMS_OP.setTargetInclination, [payload1, payload2]);
-    
-    // Fallback dla niektórych tanich bieżni (wysyłka wartości bez mnożnika x10)
-    if (success && incline > 0) {
-      await new Promise(r => setTimeout(r, 500));
-      const fallbackVal = Math.round(incline);
-      const f1 = fallbackVal & 0xff;
-      const f2 = (fallbackVal >> 8) & 0xff;
-      await this._writeCommand(FTMS_OP.setTargetInclination, [f1, f2]);
+
+    // Wyślij komendę 3 razy z odstępem 600ms – BLE bywa zawodne
+    for (let attempt = 0; attempt < 3; attempt++) {
+      if (attempt > 0) await new Promise(r => setTimeout(r, 600));
+      await this._writeCommand(FTMS_OP.setTargetInclination, [payload1, payload2]);
+      this.log(`Nachylenie – próba ${attempt + 1}/3`);
     }
   }
 }
