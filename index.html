@@ -1,369 +1,174 @@
-﻿<!doctype html>
+<!DOCTYPE html>
 <html lang="pl">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#151716" />
-    <title>Bieżnia ZIPRO Sigma</title>
-    <link rel="stylesheet" href="./styles.css" />
-    <link rel="manifest" href="./manifest.webmanifest" />
-  </head>
-  <body>
-    <main class="app-shell">
-      <aside class="side-panel">
-        <section class="brand-strip">
-          <div class="brand-mark">Z</div>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bieżnia Premium - Trening Sterowany</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- BACKGROUND -->
+  <div class="bg-layer">
+    <div class="glow glow-1"></div>
+    <div class="glow glow-2"></div>
+  </div>
+
+  <!-- APP CONTAINER -->
+  <div id="app" class="app-container">
+    
+    <!-- HEADER -->
+    <header class="top-nav glass-panel">
+      <div class="brand">
+        <span class="neon-dot"></span>
+        <h1>ZIPRO <span class="accent">FIT</span></h1>
+      </div>
+      <div class="bluetooth-status" id="btStatus">
+        <span class="status-indicator"></span>
+        <span id="btStatusText">Rozłączono</span>
+        <button id="btnConnect" class="btn-neon">POŁĄCZ BIEŻNIĘ</button>
+      </div>
+    </header>
+
+    <!-- VIEW: LIBRARY -->
+    <main id="viewLibrary" class="view active">
+      <div class="library-header">
+        <div style="display: flex; justify-content: space-between; align-items: flex-end;">
           <div>
-            <p class="meta-label">ZIPRO Sigma</p>
-            <h1>Bieżnia</h1>
+            <h2>Biblioteka Tras</h2>
+            <p>Wybierz program i rozpocznij trening dostosowany do Twojego celu.</p>
           </div>
-        </section>
-
-        <section class="photo-panel">
-          <img src="./assets/console.jpg" alt="Panel bieżni ZIPRO Sigma" />
-        </section>
-
-        <section class="stat-grid" aria-label="Statystyki treningu">
-          <article class="stat">
-            <span>Dystans</span>
-            <strong id="distanceValue">0.00 km</strong>
-          </article>
-          <article class="stat">
-            <span>Kalorie</span>
-            <strong id="caloriesValue">0 kcal</strong>
-          </article>
-          <article class="stat">
-            <span>Tempo</span>
-            <strong id="paceValue">12.0 min/km</strong>
-          </article>
-          <article class="stat">
-            <span>Zostało</span>
-            <strong id="remainingValue">30:00</strong>
-          </article>
-        </section>
-
-        <section class="cycle-panel">
-          <div class="section-heading">
-            <span>Cykl</span>
-            <strong id="phaseValue">Rozgrzewka</strong>
-          </div>
-          <div class="progress-track" aria-label="Postęp treningu">
-            <div id="progressBar" class="progress-bar"></div>
-          </div>
-          <div class="steps">
-            <span>Start</span>
-            <span>Tempo</span>
-            <span>Moc</span>
-            <span>Koniec</span>
-          </div>
-        </section>
-      </aside>
-
-      <section class="workout-panel">
-        <header class="session-header">
-          <div>
-            <p class="meta-label">Sesja aktywna</p>
-            <div class="clock-row">
-              <output id="clockValue" class="main-clock">00:00</output>
-              <span id="targetBadge" class="target-badge">Cel 30 min</span>
-            </div>
-          </div>
-          <div class="session-actions">
-            <button id="startPauseButton" class="primary-action" type="button">
-              <span id="startPauseIcon">▶</span>
-              <span id="startPauseLabel">Start</span>
-            </button>
-            <button id="resetButton" class="icon-action" type="button" aria-label="Reset sesji" title="Reset sesji">↻</button>
-          </div>
-        </header>
-
-        <div class="main-grid">
-          <section class="training-board" id="dashboardView">
-            <article class="control-card">
-              <div class="control-header">
-                <h2>Prędkość</h2>
-                <div class="stepper">
-                  <button type="button" data-speed-step="-0.5" aria-label="Zmniejsz prędkość">−</button>
-                  <button type="button" data-speed-step="0.5" aria-label="Zwiększ prędkość">+</button>
-                </div>
-              </div>
-              <div class="big-number">
-                <output id="speedValue">5.0</output>
-                <span>km/h</span>
-              </div>
-              <div class="quick-buttons" aria-label="Szybkie prędkości">
-                <button type="button" data-speed="3">3</button>
-                <button type="button" data-speed="5">5</button>
-                <button type="button" data-speed="7">7</button>
-                <button type="button" data-speed="9">9</button>
-                <button type="button" data-speed="11">11</button>
-              </div>
-            </article>
-
-            <article class="control-card">
-              <div class="control-header">
-                <h2>Nachylenie</h2>
-                <div class="stepper">
-                  <button type="button" data-incline-step="-1" aria-label="Zmniejsz nachylenie">−</button>
-                  <button type="button" data-incline-step="1" aria-label="Zwiększ nachylenie">+</button>
-                </div>
-              </div>
-              <div class="big-number">
-                <output id="inclineValue">2</output>
-                <span>%</span>
-              </div>
-              <div class="quick-buttons" aria-label="Szybkie nachylenia">
-                <button type="button" data-incline="0">0</button>
-                <button type="button" data-incline="2">2</button>
-                <button type="button" data-incline="4">4</button>
-                <button type="button" data-incline="6">6</button>
-                <button type="button" data-incline="8">8</button>
-              </div>
-            </article>
-
-            <article class="duration-panel">
-              <div class="section-heading">
-                <span>Czas treningu</span>
-                <strong id="durationValue">30 min</strong>
-              </div>
-              <div class="duration-buttons" aria-label="Wybór czasu treningu">
-                <button type="button" data-duration="20">20</button>
-                <button type="button" data-duration="30">30</button>
-                <button type="button" data-duration="45">45</button>
-                <button type="button" data-duration="60">60</button>
-              </div>
-              <div class="goal-grid">
-                <div>
-                  <span>Faza</span>
-                  <strong id="phaseGoalValue">Rozgrzewka</strong>
-                </div>
-                <div>
-                  <span>Cel prędkości</span>
-                  <strong id="speedGoalValue">4 km/h</strong>
-                </div>
-                <div>
-                  <span>Cel nachylenia</span>
-                  <strong id="inclineGoalValue">1%</strong>
-                </div>
-              </div>
-            </article>
-
-            <article class="route-panel">
-              <div class="section-heading">
-                <span>Trasa</span>
-                <strong id="routeSyncValue">Timer</strong>
-              </div>
-              <div class="route-controls">
-                <label>
-                  Scena
-                  <select id="routePreset">
-                    <option value="forest">Spacer po lesie</option>
-                    <option value="mountain">Podejscie w gorach</option>
-                    <option value="mountcook">Mount Cook 25 min</option>
-                    <option value="intervals">Interwaly cardio</option>
-                    <option value="custom">Wlasny program</option>
-                  </select>
-                </label>
-                <label class="switch-row">
-                  <input id="autoInclineToggle" type="checkbox" checked />
-                  <span>Auto nachylenie w aplikacji</span>
-                </label>
-                <label class="switch-row">
-                  <input id="autoSpeedToggle" type="checkbox" checked />
-                  <span>Auto tempo w aplikacji</span>
-                </label>
-              </div>
-              <div class="route-status">
-                <div>
-                  <span>Odcinek</span>
-                  <strong id="routeSegmentValue">Lagodny start</strong>
-                </div>
-                <div>
-                  <span>Ustaw bieznie</span>
-                  <strong id="routeInclineValue">1%</strong>
-                </div>
-                <div>
-                  <span>Predkosc celu</span>
-                  <strong id="routeSpeedValue">4 km/h</strong>
-                </div>
-              </div>
-              <div id="routeTimeline" class="route-timeline" aria-label="Plan trasy"></div>
-              <div class="program-builder">
-                <div class="section-heading">
-                  <span>Wlasny program</span>
-                  <strong id="programTotalValue">0 min</strong>
-                </div>
-                <div class="program-form">
-                  <label>
-                    Nazwa
-                    <input id="programLabelInput" type="text" value="Moj odcinek" />
-                  </label>
-                  <label>
-                    Minuty
-                    <input id="programMinutesInput" type="number" min="0.5" step="0.5" value="5" />
-                  </label>
-                  <label>
-                    km/h
-                    <input id="programSpeedInput" type="number" min="0" max="16" step="0.1" value="5.5" />
-                  </label>
-                  <label>
-                    Nachylenie %
-                    <input id="programInclineInput" type="number" min="0" max="12" step="1" value="1" />
-                  </label>
-                </div>
-                <div class="program-actions">
-                  <button id="addProgramSegmentButton" class="small-action" type="button">Dodaj odcinek</button>
-                  <button id="useCustomProgramButton" class="small-action secondary" type="button">Uruchom wlasny</button>
-                  <button id="clearProgramButton" class="small-action danger" type="button">Wyczysc</button>
-                </div>
-                <div id="customProgramList" class="custom-program-list" aria-label="Wlasne odcinki programu"></div>
-              </div>
-              <p id="routeNotice" class="route-notice">Aplikacja nie steruje silnikiem. Zmieniaj realne nachylenie przyciskami biezni.</p>
-            </article>
-            <figure class="wide-photo">
-              <img src="./assets/treadmill.jpg" alt="Bieżnia ZIPRO Sigma" />
-            </figure>
-          </section>
-
-          <section class="video-stage" id="videoView" hidden>
-            <video id="mainVideo" controls playsinline></video>
-            <div id="youtubePlayer" class="youtube-player"></div>
-            <div id="videoEmpty" class="empty-state">Wideo nie wybrane</div>
-          </section>
-
-          <aside class="media-panel">
-            <div class="tabs" role="tablist" aria-label="Widok">
-              <button id="dashboardTab" class="active" type="button">Panel</button>
-              <button id="videoTab" type="button">Wideo</button>
-            </div>
-
-            <section class="media-box">
-              <div class="media-title">
-                <span>Muzyka</span>
-                <label class="file-button">
-                  Wybierz audio
-                  <input id="audioInput" type="file" accept="audio/*" />
-                </label>
-              </div>
-              <p id="audioName" class="file-name">Nie wybrano</p>
-              <audio id="audioPlayer" controls></audio>
-            </section>
-
-            <section class="media-box">
-              <div class="media-title">
-                <span>Wideo</span>
-                <label class="file-button">
-                  Wybierz wideo
-                  <input id="videoInput" type="file" accept="video/*" />
-                </label>
-              </div>
-              <p id="videoName" class="file-name">Nie wybrano</p>
-              <video id="previewVideo" controls muted playsinline></video>
-            </section>
-
-
-            <section class="media-box">
-              <div class="media-title">
-                <span>YouTube</span>
-                <button id="loadYoutubeButton" class="small-action" type="button">Wczytaj</button>
-              </div>
-              <input id="youtubeUrlInput" class="url-input" type="url" placeholder="Wklej link YouTube" />
-              <div class="bluetooth-actions">
-                <button id="loadMountCookButton" class="small-action secondary" type="button">Mount Cook 25 min</button>
-              </div>
-              <p id="youtubeName" class="file-name">Nie wczytano</p>
-            </section>
-
-            <section class="media-box bluetooth-box">
-              <div class="media-title">
-                <span>Bluetooth FTMS</span>
-                <button id="connectBluetoothButton" class="small-action" type="button">Polacz</button>
-              </div>
-              <p id="bluetoothName" class="file-name">Nie polaczono</p>
-              <div class="bluetooth-actions">
-                <button id="scanAllBluetoothButton" class="small-action secondary" type="button">Skanuj wszystko</button>
-                <button id="clearBluetoothLogButton" class="small-action" type="button">Wyczysc log</button>
-              </div>
-              <div class="bluetooth-actions">
-                <label class="switch-row">
-                  <input id="bluetoothControlToggle" type="checkbox" />
-                  <span>Steruj biezna z programu</span>
-                </label>
-                <label class="switch-row">
-                  <input id="startTreadmillWithProgramToggle" type="checkbox" />
-                  <span>Start aplikacji wlacza bieznie</span>
-                </label>
-              </div>
-              <div class="bluetooth-actions">
-                <button id="requestControlButton" class="small-action secondary" type="button">Przejmij kontrolę</button>
-                <button id="startTreadmillButton" class="small-action secondary" type="button">Start bieżni</button>
-                <button id="sendCurrentTargetButton" class="small-action secondary" type="button">Wyślij cel</button>
-                <button id="stopTreadmillButton" class="small-action danger" type="button">Stop</button>
-              </div>
-              <p id="bluetoothMessage" class="route-notice">W FitShow widac urzadzenie FS-78D82E. Zamknij FitShow przed laczeniem tutaj.</p>
-              <pre id="bluetoothLog" class="bluetooth-log">Gotowe do skanowania.</pre>
-            </section>
-
-            <section class="status-box">
-              <div class="section-heading">
-                <span>Stan</span>
-                <strong>Ręcznie</strong>
-              </div>
-              <dl>
-                <div>
-                  <dt>Klucz bezpieczeństwa</dt>
-                  <dd>Sprawdzony</dd>
-                </div>
-                <div>
-                  <dt>Pas</dt>
-                  <dd>Centrowany</dd>
-                </div>
-                <div>
-                  <dt>Muzyka</dt>
-                  <dd id="audioStatus">Pusta</dd>
-                </div>
-                <div>
-                  <dt>Wideo</dt>
-                  <dd id="videoStatus">Puste</dd>
-                </div>
-                <div>
-                  <dt>YouTube</dt>
-                  <dd id="youtubeStatus">Pusty</dd>
-                </div>
-                <div>
-                  <dt>Trasa</dt>
-                  <dd id="routeStatus">Aktywna</dd>
-                </div>
-                <div>
-                  <dt>Bluetooth</dt>
-                  <dd id="bluetoothStatus">Offline</dd>
-                </div>
-                <div>
-                  <dt>Sterowanie</dt>
-                  <dd id="controlStatus">Wylaczone</dd>
-                </div>
-              </dl>
-            </section>
-          </aside>
+          <button id="btnOpenCreator" class="btn-neon">+ STWÓRZ WŁASNY PROGRAM</button>
         </div>
-      </section>
-
-      <aside class="model-panel">
-        <section class="model-card">
-          <p class="meta-label">Model</p>
-          <h2>SIGMA</h2>
-          <img src="./assets/label.jpg" alt="Etykieta modelu ZIPRO Sigma" />
-          <div class="model-grid">
-            <div><span>Limit</span><strong>120 kg</strong></div>
-            <div><span>Zasilanie</span><strong>230 V</strong></div>
-            <div><span>Tryb</span><strong>Domowy</strong></div>
-            <div><span>Standard</span><strong>EN 957</strong></div>
-          </div>
-        </section>
-      </aside>
+      </div>
+      <div id="routesGrid" class="routes-grid">
+        <!-- Generowane z JSON -->
+      </div>
     </main>
 
-    <script src="./app.js"></script>
-  </body>
-</html>
+    <!-- VIEW: ACTIVE WORKOUT -->
+    <main id="viewWorkout" class="view hidden">
+      <!-- Media Area (Background) -->
+      <div class="media-container" id="mediaContainer">
+        <!-- Wideo YouTube -->
+        <div id="youtubePlayer" style="width: 100%; height: 100%; border: none;"></div>
+        <!-- Niewidoczny odtwarzacz muzyki YouTube -->
+        <div id="youtubeMusicPlayer" style="display: none; width: 0; height: 0;"></div>
+        <div class="media-overlay"></div>
+      </div>
 
+      <!-- Dashboard UI -->
+      <div class="workout-dashboard glass-panel">
+        
+        <!-- Top Stats -->
+        <div class="stats-row">
+          <div class="stat-box">
+            <span class="stat-label">Dystans</span>
+            <div class="stat-value"><span id="valDistance">0.00</span> <small>km</small></div>
+          </div>
+          <div class="stat-box">
+            <span class="stat-label">Czas</span>
+            <div class="stat-value" id="valTime">00:00</div>
+          </div>
+          <div class="stat-box">
+            <span class="stat-label">Kalorie</span>
+            <div class="stat-value"><span id="valCalories">0</span> <small>kcal</small></div>
+          </div>
+        </div>
+
+        <!-- Main Controls (Speed & Incline) -->
+        <div class="main-controls">
+          <div class="control-dial">
+            <div class="dial-value accent" id="valSpeed">0.0</div>
+            <div class="dial-label">PRĘDKOŚĆ (KM/H)</div>
+            <div class="dial-next" id="nextSpeedLabel">Za <span id="nextTime">--</span>s: -- km/h</div>
+          </div>
+          
+          <div class="progress-circle-container">
+            <svg class="progress-circle" viewBox="0 0 100 100">
+              <circle class="progress-bg" cx="50" cy="50" r="45"></circle>
+              <circle class="progress-bar" id="workoutProgressBar" cx="50" cy="50" r="45" stroke-dasharray="283" stroke-dashoffset="283"></circle>
+            </svg>
+            <div class="progress-text">
+              <div id="valStage" class="stage-name">Przygotowanie</div>
+              <div id="valStageProgress" class="stage-time">00:00</div>
+            </div>
+          </div>
+
+          <div class="control-dial">
+            <div class="dial-value" id="valIncline">0</div>
+            <div class="dial-label">NACHYLENIE (%)</div>
+            <div class="dial-next" id="nextInclineLabel">Kolejny etap: -- %</div>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="action-row">
+          <button id="btnStop" class="btn-massive btn-danger">STOP</button>
+          <button id="btnPause" class="btn-massive btn-secondary">PAUZA</button>
+        </div>
+
+      </div>
+    </main>
+
+    <!-- VIEW: CREATOR -->
+    <main id="viewCreator" class="view hidden">
+      <div class="library-header" style="display: flex; justify-content: space-between; align-items: flex-end;">
+        <div>
+          <h2>Kreator Własnego Programu</h2>
+          <p>Zbuduj trasę krok po kroku.</p>
+        </div>
+        <div class="creator-time-summary">
+          Zakładany czas: <span id="targetTimeDisplay">30</span> min | Pozostało: <span id="remainingTimeDisplay" class="accent">30</span> min
+        </div>
+      </div>
+      <div class="creator-form glass-panel">
+        <div class="form-group">
+          <label>Zakładany całkowity czas treningu (minuty):</label>
+          <input type="number" id="customRouteTargetTime" placeholder="Np. 30" class="input-neon" value="30">
+        </div>
+        <div class="form-group">
+          <label>Nazwa programu:</label>
+          <input type="text" id="customRouteName" placeholder="Np. Mój poranny interwał" class="input-neon">
+        </div>
+        <div class="form-group">
+          <label>Wideo w tle (YouTube):</label>
+          <input type="text" id="customRouteVideo" placeholder="np. https://youtu.be/... (krajobrazy)" class="input-neon">
+        </div>
+        <div class="form-group">
+          <label>Muzyka w tle (YouTube):</label>
+          <input type="text" id="customRouteMusic" placeholder="np. https://youtu.be/... (ulubiona muzyka)" class="input-neon">
+        </div>
+        
+        <div class="steps-editor">
+          <h3>Etapy trasy</h3>
+          <div id="customStepsList" class="steps-list"></div>
+          
+          <div class="add-step-box">
+            <input type="text" id="stepName" placeholder="Nazwa etapu (opcjonalnie)" class="input-neon step-input">
+            <input type="number" id="stepDuration" placeholder="Czas (minuty)" step="0.5" class="input-neon step-input">
+            <input type="number" id="stepSpeed" placeholder="Prędkość (km/h)" step="0.1" class="input-neon step-input">
+            <input type="number" id="stepIncline" placeholder="Nachylenie (%)" class="input-neon step-input">
+            <button id="btnAddStep" class="btn-neon">Dodaj Etap</button>
+          </div>
+        </div>
+
+        <div class="action-row" style="margin-top: 2rem; display: flex; gap: 10px;">
+          <button id="btnSaveCustom" class="btn-massive btn-secondary" style="background: var(--accent); color: white; border: none; flex: 1;">ZAPISZ</button>
+          <button id="btnSaveAndPlayCustom" class="btn-massive btn-secondary" style="background: rgba(40, 167, 69, 0.8); color: white; border: none; flex: 1;">ZAPISZ I URUCHOM</button>
+          <button id="btnCancelCustom" class="btn-massive btn-secondary" style="flex: 1;">ANULUJ</button>
+        </div>
+      </div>
+    </main>
+
+  </div>
+
+  <script src="https://www.youtube.com/iframe_api"></script>
+  <script src="js/defaultRoutes.js"></script>
+  <script src="js/TreadmillController.js"></script>
+  <script src="js/TreadmillWorkoutRunner.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
