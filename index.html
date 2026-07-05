@@ -53,10 +53,9 @@
       <!-- Media Area (Background) -->
       <div class="media-container" id="mediaContainer">
         <!-- Wideo YouTube -->
-        <div id="youtubePlayer" style="width: 100%; height: 100%; border: none;"></div>
-        <!-- Niewidoczny odtwarzacz muzyki YouTube -->
-        <div id="youtubeMusicPlayer" style="display: none; width: 0; height: 0;"></div>
-        <div class="media-overlay"></div>
+        <div id="youtubePlayer" style="width:100%; height:100%; pointer-events: none;"></div>
+      <div id="youtubeMusicPlayer" style="display:none;"></div>
+      <div style="position: absolute; top:0; left:0; width:100%; height:100%; background: rgba(11, 12, 16, 0.3); pointer-events: none;"></div>
       </div>
 
       <!-- Dashboard UI -->
@@ -70,7 +69,7 @@
           </div>
           <div class="stat-box">
             <span class="stat-label">Czas</span>
-            <div class="stat-value" id="valTime">00:00</div>
+            <div class="stat-value" id="valTime" style="font-size: 2.2rem;">00:00</div>
           </div>
           <div class="stat-box">
             <span class="stat-label">Kalorie</span>
@@ -81,7 +80,7 @@
         <!-- Main Controls (Speed & Incline) -->
         <div class="main-controls">
           <div class="control-dial">
-            <div class="dial-value accent" id="valSpeed">0.0</div>
+            <div class="dial-value accent" id="valSpeed" style="font-size: 3.5rem;">0.0</div>
             <div class="dial-label">PRĘDKOŚĆ (KM/H)</div>
             <div class="dial-next" id="nextSpeedLabel">Za <span id="nextTime">--</span>s: -- km/h</div>
           </div>
@@ -92,13 +91,13 @@
               <circle class="progress-bar" id="workoutProgressBar" cx="50" cy="50" r="45" stroke-dasharray="283" stroke-dashoffset="283"></circle>
             </svg>
             <div class="progress-text">
-              <div id="valStage" class="stage-name">Przygotowanie</div>
+              <div id="valStage" class="stage-name" style="font-size: 1rem;">Przygotowanie</div>
               <div id="valStageProgress" class="stage-time">00:00</div>
             </div>
           </div>
 
           <div class="control-dial">
-            <div class="dial-value" id="valIncline">0</div>
+            <div class="dial-value" id="valIncline" style="font-size: 3.5rem;">0</div>
             <div class="dial-label">NACHYLENIE (%)</div>
             <div class="dial-next" id="nextInclineLabel">Kolejny etap: -- %</div>
           </div>
