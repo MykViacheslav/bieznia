@@ -7,7 +7,7 @@ class TreadmillWorkoutRunner {
     
     // Limits
     this.MAX_SPEED_STEP_KMH = 1.0;
-    this.SPEED_STEP_INTERVAL_MS = 2000;
+    this.SPEED_STEP_INTERVAL_MS = 4000; // 4s między krokami prędkości – daje czas na nachylenie
     
     // State
     this.route = null;
@@ -84,7 +84,10 @@ class TreadmillWorkoutRunner {
     this.timerId = null;
     if (this.stepTimerId) clearTimeout(this.stepTimerId);
     this.stepTimerId = null;
-    
+    if (this._inclineRefreshTimer) {
+      clearInterval(this._inclineRefreshTimer);
+      this._inclineRefreshTimer = null;
+    }
     await this.controller.setTargetSpeed(0);
   }
   
@@ -157,12 +160,12 @@ class TreadmillWorkoutRunner {
   }
   
   _resendInclineAfterSpeed() {
-    // Odczekaj aż bieżnia przetworzy komendę prędkości, potem prześlij nachylenie
+    // Krótkie opóźnienie po prędkości, potem wyślij nachylenie
     setTimeout(() => {
       if (this.isRunning && this.currentIncline > 0) {
         this.controller.setTargetIncline(this.currentIncline);
       }
-    }, 800);
+    }, 400);
   }
   
   _tick() {
