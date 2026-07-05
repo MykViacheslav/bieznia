@@ -138,6 +138,8 @@ class TreadmillWorkoutRunner {
     if (Math.abs(diff) < 0.1) {
       this.currentSpeed = this.targetSpeed;
       this.controller.setTargetSpeed(this.currentSpeed);
+      // Ta bieżnia resetuje nachylenie po każdej komendzie prędkości – wyślij je ponownie
+      this._resendInclineAfterSpeed();
       return;
     }
     
@@ -146,10 +148,21 @@ class TreadmillWorkoutRunner {
     
     this.currentSpeed += (stepAmount * direction);
     this.controller.setTargetSpeed(this.currentSpeed);
+    // Ta bieżnia resetuje nachylenie po każdej komendzie prędkości – wyślij je ponownie
+    this._resendInclineAfterSpeed();
     
     if (Math.abs(this.targetSpeed - this.currentSpeed) > 0.1) {
       this.stepTimerId = setTimeout(() => this._stepSpeedTowardsTarget(), this.SPEED_STEP_INTERVAL_MS);
     }
+  }
+  
+  _resendInclineAfterSpeed() {
+    // Odczekaj aż bieżnia przetworzy komendę prędkości, potem prześlij nachylenie
+    setTimeout(() => {
+      if (this.isRunning && this.currentIncline > 0) {
+        this.controller.setTargetIncline(this.currentIncline);
+      }
+    }, 800);
   }
   
   _tick() {
