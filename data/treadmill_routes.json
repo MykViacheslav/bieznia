@@ -1,0 +1,161 @@
+[
+  {
+    "id": "route_light_walk_20",
+    "name": "Spacer lekki 20 min",
+    "description": "Lekki i przyjemny spacer na rozpoczęcie dnia.",
+    "type": "walking",
+    "level": "easy",
+    "duration_min": 20,
+    "video_url": "https://www.youtube.com/watch?v=FjU_x1106pg",
+    "music_url": "",
+    "control_mode": "connected_treadmill",
+    "max_speed_kmh": 4.5,
+    "max_incline": 2,
+    "steps": [
+      { "order": 1, "duration_sec": 300, "speed_kmh": 3.0, "incline": 0, "label": "Rozgrzewka", "warning_before_sec": 10 },
+      { "order": 2, "duration_sec": 600, "speed_kmh": 4.0, "incline": 1, "label": "Spacer właściwy", "warning_before_sec": 10 },
+      { "order": 3, "duration_sec": 300, "speed_kmh": 3.5, "incline": 0, "label": "Wyciszenie", "warning_before_sec": 10 }
+    ]
+  },
+  {
+    "id": "route_hill_walk_30",
+    "name": "Spacer pod górę 30 min",
+    "description": "Trening wzmacniający pośladki i łydki, spokojne tempo ale duże nachylenie.",
+    "type": "hill",
+    "level": "medium",
+    "duration_min": 30,
+    "video_url": "",
+    "music_url": "",
+    "control_mode": "connected_treadmill",
+    "max_speed_kmh": 5.0,
+    "max_incline": 8,
+    "steps": [
+      { "order": 1, "duration_sec": 300, "speed_kmh": 3.5, "incline": 1, "label": "Rozgrzewka", "warning_before_sec": 10 },
+      { "order": 2, "duration_sec": 300, "speed_kmh": 4.0, "incline": 4, "label": "Początek góry", "warning_before_sec": 10 },
+      { "order": 3, "duration_sec": 600, "speed_kmh": 4.5, "incline": 8, "label": "Szczyt", "warning_before_sec": 10 },
+      { "order": 4, "duration_sec": 300, "speed_kmh": 4.0, "incline": 4, "label": "Zejście", "warning_before_sec": 10 },
+      { "order": 5, "duration_sec": 300, "speed_kmh": 3.5, "incline": 0, "label": "Wyciszenie", "warning_before_sec": 10 }
+    ]
+  },
+  {
+    "id": "route_walk_run_25",
+    "name": "Marsz + lekki bieg 25 min",
+    "description": "Przeplatanie szybkiego marszu z truchtem.",
+    "type": "walk_run",
+    "level": "medium",
+    "duration_min": 25,
+    "video_url": "",
+    "music_url": "",
+    "control_mode": "connected_treadmill",
+    "max_speed_kmh": 7.5,
+    "max_incline": 2,
+    "steps": [
+      { "order": 1, "duration_sec": 300, "speed_kmh": 4.5, "incline": 0, "label": "Szybki marsz", "warning_before_sec": 10 },
+      { "order": 2, "duration_sec": 300, "speed_kmh": 6.5, "incline": 1, "label": "Trucht", "warning_before_sec": 10 },
+      { "order": 3, "duration_sec": 300, "speed_kmh": 5.0, "incline": 1, "label": "Marsz", "warning_before_sec": 10 },
+      { "order": 4, "duration_sec": 300, "speed_kmh": 7.0, "incline": 1, "label": "Trucht", "warning_before_sec": 10 },
+      { "order": 5, "duration_sec": 300, "speed_kmh": 4.0, "incline": 0, "label": "Wyciszenie", "warning_before_sec": 10 }
+    ]
+  },
+  {
+    "id": "route_easy_run_30",
+    "name": "Bieg spokojny 30 min",
+    "description": "Zwykły ciągły bieg w średnim tempie.",
+    "type": "running",
+    "level": "medium",
+    "duration_min": 30,
+    "video_url": "",
+    "music_url": "",
+    "control_mode": "connected_treadmill",
+    "max_speed_kmh": 9.0,
+    "max_incline": 1,
+    "steps": [
+      { "order": 1, "duration_sec": 300, "speed_kmh": 5.0, "incline": 0, "label": "Marsz do biegu", "warning_before_sec": 10 },
+      { "order": 2, "duration_sec": 1200, "speed_kmh": 8.5, "incline": 1, "label": "Bieg główny", "warning_before_sec": 10 },
+      { "order": 3, "duration_sec": 300, "speed_kmh": 4.5, "incline": 0, "label": "Marsz powrotny", "warning_before_sec": 10 }
+    ]
+  },
+  {
+    "id": "route_intervals_20",
+    "name": "Interwały 20 min",
+    "description": "Krótkie i intensywne przyspieszenia.",
+    "type": "intervals",
+    "level": "hard",
+    "duration_min": 20,
+    "video_url": "",
+    "music_url": "",
+    "control_mode": "connected_treadmill",
+    "max_speed_kmh": 12.0,
+    "max_incline": 2,
+    "steps": [
+      { "order": 1, "duration_sec": 300, "speed_kmh": 5.0, "incline": 0, "label": "Rozgrzewka", "warning_before_sec": 10 },
+      { "order": 2, "duration_sec": 60, "speed_kmh": 11.0, "incline": 1, "label": "Sprint 1", "warning_before_sec": 10 },
+      { "order": 3, "duration_sec": 120, "speed_kmh": 4.5, "incline": 0, "label": "Przerwa 1", "warning_before_sec": 10 },
+      { "order": 4, "duration_sec": 60, "speed_kmh": 11.5, "incline": 1, "label": "Sprint 2", "warning_before_sec": 10 },
+      { "order": 5, "duration_sec": 120, "speed_kmh": 4.5, "incline": 0, "label": "Przerwa 2", "warning_before_sec": 10 },
+      { "order": 6, "duration_sec": 60, "speed_kmh": 12.0, "incline": 1, "label": "Sprint 3", "warning_before_sec": 10 },
+      { "order": 7, "duration_sec": 120, "speed_kmh": 4.5, "incline": 0, "label": "Przerwa 3", "warning_before_sec": 10 },
+      { "order": 8, "duration_sec": 60, "speed_kmh": 12.0, "incline": 2, "label": "Sprint 4", "warning_before_sec": 10 },
+      { "order": 9, "duration_sec": 300, "speed_kmh": 4.0, "incline": 0, "label": "Cool down", "warning_before_sec": 10 }
+    ]
+  },
+  {
+    "id": "route_mountain_40",
+    "name": "Trasa Góry 40 min",
+    "description": "Zmienne, bardzo wysokie nachylenia imitujące bieg/marsz w górach.",
+    "type": "hill",
+    "level": "hard",
+    "duration_min": 40,
+    "video_url": "",
+    "music_url": "",
+    "control_mode": "connected_treadmill",
+    "max_speed_kmh": 7.0,
+    "max_incline": 12,
+    "steps": [
+      { "order": 1, "duration_sec": 300, "speed_kmh": 4.5, "incline": 1, "label": "Dolina", "warning_before_sec": 10 },
+      { "order": 2, "duration_sec": 600, "speed_kmh": 5.0, "incline": 6, "label": "Podejście 1", "warning_before_sec": 10 },
+      { "order": 3, "duration_sec": 300, "speed_kmh": 5.5, "incline": 3, "label": "Płaski grzbiet", "warning_before_sec": 10 },
+      { "order": 4, "duration_sec": 600, "speed_kmh": 4.5, "incline": 10, "label": "Podejście 2", "warning_before_sec": 10 },
+      { "order": 5, "duration_sec": 300, "speed_kmh": 4.0, "incline": 12, "label": "Stromy szczyt", "warning_before_sec": 10 },
+      { "order": 6, "duration_sec": 300, "speed_kmh": 4.5, "incline": 0, "label": "Zejście wyciszające", "warning_before_sec": 10 }
+    ]
+  },
+  {
+    "id": "route_burn_45",
+    "name": "Spalanie 45 min",
+    "description": "Trening optymalny do spalania tkanki tłuszczowej.",
+    "type": "walking",
+    "level": "medium",
+    "duration_min": 45,
+    "video_url": "",
+    "music_url": "",
+    "control_mode": "connected_treadmill",
+    "max_speed_kmh": 6.5,
+    "max_incline": 3,
+    "steps": [
+      { "order": 1, "duration_sec": 300, "speed_kmh": 4.5, "incline": 1, "label": "Rozgrzewka", "warning_before_sec": 10 },
+      { "order": 2, "duration_sec": 900, "speed_kmh": 5.8, "incline": 2, "label": "Faza I", "warning_before_sec": 10 },
+      { "order": 3, "duration_sec": 900, "speed_kmh": 6.2, "incline": 3, "label": "Faza II", "warning_before_sec": 10 },
+      { "order": 4, "duration_sec": 300, "speed_kmh": 5.0, "incline": 1, "label": "Faza III", "warning_before_sec": 10 },
+      { "order": 5, "duration_sec": 300, "speed_kmh": 4.0, "incline": 0, "label": "Wyciszenie", "warning_before_sec": 10 }
+    ]
+  },
+  {
+    "id": "route_after_work_15",
+    "name": "Rozruch po pracy 15 min",
+    "description": "Krótki spacer do rozruszania nóg.",
+    "type": "walking",
+    "level": "easy",
+    "duration_min": 15,
+    "video_url": "",
+    "music_url": "",
+    "control_mode": "connected_treadmill",
+    "max_speed_kmh": 5.0,
+    "max_incline": 0,
+    "steps": [
+      { "order": 1, "duration_sec": 300, "speed_kmh": 3.5, "incline": 0, "label": "Start", "warning_before_sec": 10 },
+      { "order": 2, "duration_sec": 300, "speed_kmh": 4.5, "incline": 0, "label": "Pobudzenie", "warning_before_sec": 10 },
+      { "order": 3, "duration_sec": 300, "speed_kmh": 3.0, "incline": 0, "label": "Zakończenie", "warning_before_sec": 10 }
+    ]
+  }
+]

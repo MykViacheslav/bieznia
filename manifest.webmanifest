@@ -1,0 +1,8 @@
+{
+  "name": "Bieżnia ZIPRO Sigma",
+  "short_name": "Bieżnia",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0e100f",
+  "theme_color": "#151716"
+}
