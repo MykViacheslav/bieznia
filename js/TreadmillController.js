@@ -137,11 +137,11 @@ class TreadmillController {
     return new Promise((resolve) => {
       this.writeQueue = this.writeQueue.then(async () => {
         const res = await execute();
-        await new Promise(r => setTimeout(r, 1000)); // 1 sekunda opóźnienia
+        await new Promise(r => setTimeout(r, 300)); // 300ms między komendami
         resolve(res);
       }).catch(async () => {
         const res = await execute();
-        await new Promise(r => setTimeout(r, 1000));
+        await new Promise(r => setTimeout(r, 300));
         resolve(res);
       });
     });

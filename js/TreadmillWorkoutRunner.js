@@ -31,6 +31,9 @@ class TreadmillWorkoutRunner {
     this.onTick = null;
     this.onStepChange = null;
     this.onWorkoutComplete = null;
+    
+    // Odświeżanie nachylenia co 5 sekund
+    this._inclineRefreshTimer = null;
   }
   
   loadRoute(routeData) {
@@ -67,6 +70,10 @@ class TreadmillWorkoutRunner {
     if (this.stepTimerId) {
       clearTimeout(this.stepTimerId);
       this.stepTimerId = null;
+    }
+    if (this._inclineRefreshTimer) {
+      clearInterval(this._inclineRefreshTimer);
+      this._inclineRefreshTimer = null;
     }
     await this.controller.stopTreadmill();
   }
@@ -112,11 +119,16 @@ class TreadmillWorkoutRunner {
     // Bezpieczne, stopniowe zmienianie prędkości
     this._stepSpeedTowardsTarget();
     
-    // Nachylenie zmieniamy od razu
-    if (this.currentIncline !== targetIncline) {
-      this.currentIncline = targetIncline;
-      this.controller.setTargetIncline(targetIncline);
-    }
+    // Nachylenie zmieniamy od razu i ustawiamy cykliczne odświeżanie co 5 sekund
+    this.currentIncline = targetIncline;
+    this.controller.setTargetIncline(targetIncline);
+    
+    if (this._inclineRefreshTimer) clearInterval(this._inclineRefreshTimer);
+    this._inclineRefreshTimer = setInterval(() => {
+      if (this.isRunning) {
+        this.controller.setTargetIncline(this.currentIncline);
+      }
+    }, 5000);
   }
   
   _stepSpeedTowardsTarget() {
